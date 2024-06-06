@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.example</groupId>
+    <artifactId>JavaTestProject</artifactId>
+    <version>2.0-SNAPSHOT</version>
+    
+	<properties>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+       <cloudbeat.version>1.0.8-SNAPSHOT</cloudbeat.version>
+
+		<!-- Encoding For Hebrew in Java 11-->
+		<java.encoding>UTF-8</java.encoding>
+		<project.build.sourceEncoding>${java.encoding}</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>${java.encoding}</project.reporting.outputEncoding>
+	</properties>
+
+    <build>
+        <plugins>
+            <!-- Need at least 2.22.0 to support JUnit 5 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M3</version>
+				<configuration>
+                    <encoding>UTF-8</encoding>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>libs-snapshot</id>
+            <name>Menora Development Snapshot Repository</name>
+            <url>https://repo.menora.co.il/artifactory/libs-snapshot/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>central</id>
+            <name>repo.monera.libs-release</name>
+            <url>https://repo.menora.co.il/artifactory/libs-release</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>repo.monera.libs-snapshot</name>
+            <url>https://repo.menora.co.il/artifactory/libs-snapshot</url>
+        </snapshotRepository>
+    </distributionManagement>
+    
+    <dependencies>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.4.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.12.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.8.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.8.2</version>
+            <scope>test</scope>
+        </dependency>
+       
+        <dependency>
+            <groupId>io.cloudbeat</groupId>
+            <artifactId>cb-kit-selenium4</artifactId>
+            <version>${cloudbeat.version}</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion> <!-- declare the exclusion here -->
+                    <groupId>org.apache.geronimo.specs</groupId>
+                    <artifactId>geronimo-activation_1.0.2_spec</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.cloudbeat</groupId>
+            <artifactId>cb-kit-common</artifactId>
+            <version>${cloudbeat.version}</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion> <!-- declare the exclusion here -->
+                    <groupId>org.apache.geronimo.specs</groupId>
+                    <artifactId>geronimo-activation_1.0.2_spec</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.cloudbeat</groupId>
+            <artifactId>cb-kit-junit5</artifactId>
+            <version>${cloudbeat.version}</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion> <!-- declare the exclusion here -->
+                    <groupId>org.apache.geronimo.specs</groupId>
+                    <artifactId>geronimo-activation_1.0.2_spec</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+</project>
